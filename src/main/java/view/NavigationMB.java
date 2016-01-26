@@ -7,7 +7,5 @@ import javax.faces.bean.ManagedBean;
 @ApplicationScoped
 public class NavigationMB {
 
-	public String gotoSecond() {
-		return "pm:second";
-	}
+	
 }

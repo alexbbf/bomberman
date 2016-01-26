@@ -7,6 +7,7 @@
 		<jta-data-source>java:jboss/datasources/bomberman</jta-data-source>
 		<class>model.Jogador</class>
 		<class>model.Questao</class>
+		<class>model.Alternativa</class>
 		<properties>
 			<property name="hibernate.default_schema" value="bomberman" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />

@@ -4,31 +4,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Jogador {
-	
+public class Alternativa {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nome;
+	private String descricao;
 	
-	private String cpf;
+	@ManyToOne
+	private Questao questao;
 	
-	private String senha;
-	
-	private Long recorde;
-	
-	
-
-	public Long getRecorde() {
-		return recorde;
-	}
-
-	public void setRecorde(Long recorde) {
-		this.recorde = recorde;
-	}
+	private boolean correta;
 
 	public Long getId() {
 		return id;
@@ -38,28 +28,20 @@ public class Jogador {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public boolean isCorreta() {
+		return correta;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setCorreta(boolean correta) {
+		this.correta = correta;
 	}
 
 	@Override
@@ -78,7 +60,7 @@ public class Jogador {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Jogador other = (Jogador) obj;
+		Alternativa other = (Alternativa) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -86,8 +68,6 @@ public class Jogador {
 			return false;
 		return true;
 	}
-
-
 	
-
+	
 }
