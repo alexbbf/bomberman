@@ -1,10 +1,14 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,17 +16,17 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Questao {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String descricao;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Assunto assunto;
-	
-	@OneToMany(mappedBy = "questao")
+
+	@OneToMany(mappedBy = "questao", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Alternativa> alternativas;
 
 	public Long getId() {
@@ -49,7 +53,27 @@ public class Questao {
 		this.assunto = assunto;
 	}
 
+	public List<Alternativa> getAlternativas() {
+		Collections.shuffle(alternativas);
+		return alternativas;
+	}
+
+	public void setAlternativas(List<Alternativa> alternativas) {
+		this.alternativas = alternativas;
+	}
+
+	public void adiconarAlternativa(Alternativa a) {
+		if (alternativas == null) {
+			alternativas = new ArrayList<Alternativa>();
+		}
+		a.setQuestao(this);
+		alternativas.add(a);
+	}
 	
+	public Questao() {
+		alternativas = new ArrayList<Alternativa>();
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -74,7 +98,5 @@ public class Questao {
 			return false;
 		return true;
 	}
-	
-	
 
 }

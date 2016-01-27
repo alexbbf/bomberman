@@ -14,13 +14,18 @@ public class QuestaoDao {
 	public QuestaoDao(EntityManager em) {
 		this.em = em;
 	}
+	
+	public void salvar(Questao questao){
+		em.merge(questao);
+		
+	}
 
 	public List<Questao> pesquisar(long quantidade, Assunto assunto) {
 
 		return em
-				.createQuery("select q from Questao q where q.assunto = :assunto order by random() limit :quantidade",
+				.createQuery("select q from Questao q where q.assunto = :assunto  order by  random() ",
 						Questao.class)
-				.setParameter(":assunto", assunto).setParameter(":quantidade", quantidade).getResultList();
+				.setParameter("assunto", assunto).getResultList();
 	}
 
 }

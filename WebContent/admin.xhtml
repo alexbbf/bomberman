@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+	<pm:page id="loginpage">
+		<pm:header title="Login"></pm:header>
+
+		<pm:content>
+			<h:form>
+				<pm:field>
+					<p:outputLabel for="login" value="CPF:" />
+					<p:inputText id="login" />
+				</pm:field>
+				<pm:field>
+					<br />
+					<p:outputLabel for="senha" value="Senha:" />
+					<p:password id="senha" />
+				</pm:field>
+
+				<p:button outcome="pm:principal" value="ENTRAR" />
+
+			</h:form>
+		</pm:content>
+	</pm:page>
+
+	<pm:page id="principal">
+		<pm:header title="Admin"></pm:header>
+
+		<pm:content>
+			<h:form>
+
+
+				<p:button outcome="pm:novapergunta" value="Nova Pergunta" />
+
+			</h:form>
+		</pm:content>
+	</pm:page>
+
+	<pm:page id="novapergunta">
+		<pm:header title="Nova Pegunta"></pm:header>
+
+		<pm:content>
+			<h:form>
+				<pm:field>
+					<p:outputLabel for="assunto" value="Assunto:" />
+					<p:selectOneRadio id="assunto" required="true"
+						value="#{questaoMB.assunto}">
+						<f:selectItems value="#{aplicacaoMB.assuntos}" var="_a"
+							itemLabel="#{_a.descricao}" itemValue="#{_a}" />
+					</p:selectOneRadio>
+				</pm:field>
+				<pm:field>
+					<p:outputLabel for="pergunta" value="Pergunta:" />
+					<p:inputText id="pergunta" value="#{questaoMB.questao.descricao}"
+						required="true" />
+				</pm:field>
+				<pm:field>
+					<p:outputLabel for="alternativaCorreta" value="Alternativa Certa:" />
+					<p:inputText id="alternativaCorreta"
+						value="#{questaoMB.certa.descricao}" required="true" />
+				</pm:field>
+				<pm:field>
+					<p:outputLabel for="alternativa1" value="Alternativa" />
+					<p:inputText id="alternativa1" value="#{questaoMB.al1.descricao}"
+						required="true" />
+				</pm:field>
+				<pm:field>
+					<p:outputLabel for="alternativa2" value="Alternativa" />
+					<p:inputText id="alternativa2" value="#{questaoMB.al2.descricao}"
+						required="true" />
+				</pm:field>
+				<pm:field>
+					<p:outputLabel for="alternativa3" value="Alternativa" />
+					<p:inputText id="alternativa3" value="#{questaoMB.al3.descricao}"
+						required="true" />
+				</pm:field>
+
+
+
+
+
+				<p:commandButton action="#{questaoMB.salvar()}" value="Salvar"
+					 process="@form" update="@form">
+				</p:commandButton>
+
+			</h:form>
+		</pm:content>
+	</pm:page>
+
+
+</h:body>
+
+</html>

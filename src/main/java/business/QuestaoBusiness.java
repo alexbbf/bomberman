@@ -27,6 +27,14 @@ public class QuestaoBusiness {
 		dao = new QuestaoDao(em);
 
 	}
+	
+	
+
+	public void salvar(Questao questao) {
+		dao.salvar(questao);
+	}
+
+
 
 	public List<Questao> pesquisar(Assunto[] assuntos) {
 		long totalDePerguntas = 30;

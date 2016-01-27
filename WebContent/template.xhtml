@@ -12,7 +12,7 @@
 </h:head>
 
 <h:body>
-
+	<h:outputScript library="primefaces" name="primefaces.js" />
 	<pm:page id="loginpage">
 		<pm:header title="Login"></pm:header>
 
@@ -52,7 +52,33 @@
 					</p:selectManyCheckbox>
 				</pm:field>
 
-				<p:commandButton value="JOGAR" />
+				<p:commandButton action="#{questaoMB.jogar()}" value="JOGAR"
+					process="@form" update=":questao" />
+			</h:form>
+		</pm:content>
+	</pm:page>
+
+	<pm:page id="questao">
+		<pm:header title="#{questaoMB.questao.assunto.label}"></pm:header>
+
+		<pm:content>
+			<h:form>
+				<pm:field>
+					<p:outputLabel
+						value="#{questaoMB.indice+1} ) #{questaoMB.questao.descricao}" />
+				</pm:field>
+				<br />
+				<pm:field>
+					<p:selectOneRadio id="selectOneRadio" required="true"
+						value="#{questaoMB.alternativaSelecionada}"
+						converter="entityConverter">
+						<f:selectItems value="#{questaoMB.questao.alternativas}" var="_a"
+							itemLabel="#{_a.descricao}" itemValue="#{_a}" />
+					</p:selectOneRadio>
+				</pm:field>
+
+				<p:commandButton action="#{questaoMB.proxima()}" value="RESPONDER"
+					update="@form" />
 			</h:form>
 		</pm:content>
 	</pm:page>

@@ -23,6 +23,17 @@ public class Alternativa {
 	public Long getId() {
 		return id;
 	}
+	
+
+	public Questao getQuestao() {
+		return questao;
+	}
+
+
+	public void setQuestao(Questao questao) {
+		this.questao = questao;
+	}
+
 
 	public void setId(Long id) {
 		this.id = id;
