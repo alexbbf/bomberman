@@ -63,6 +63,7 @@
 
 		<pm:content>
 			<h:form>
+				<p:growl autoUpdate="true" id="growl" life="500"/>
 				<pm:field>
 					<p:outputLabel
 						value="#{questaoMB.indice+1} ) #{questaoMB.questao.descricao}" />
@@ -78,11 +79,29 @@
 				</pm:field>
 
 				<p:commandButton action="#{questaoMB.proxima()}" value="RESPONDER"
-					update="questao" />
+					update="questao fim" />
 			</h:form>
 		</pm:content>
 	</pm:page>
+	
+	<pm:page id="fim">
+		<pm:header title="Resultado"></pm:header>
 
+		<pm:content>
+			<h:form>
+				<pm:field>
+					<p:outputLabel
+						value="Acertos: #{questaoMB.acertos}" />
+				</pm:field>
+				<pm:field>
+					<p:outputLabel
+						value="Erros: #{questaoMB.erros}" />
+				</pm:field>
+				<br />
+				<p:button outcome="pm:principal" value="JOGAR NOVAMENTE"/> />
+			</h:form>
+		</pm:content>
+	</pm:page>
 
 </h:body>
 

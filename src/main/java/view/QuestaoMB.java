@@ -10,6 +10,7 @@ import business.QuestaoBusiness;
 import model.Alternativa;
 import model.Assunto;
 import model.Questao;
+import util.JsfUtil;
 
 @ManagedBean
 @ViewScoped
@@ -29,6 +30,8 @@ public class QuestaoMB {
 	private int indice;
 
 	private int acertos;
+	
+	private int erros;
 
 	private Assunto assunto;
 
@@ -39,6 +42,9 @@ public class QuestaoMB {
 	private Alternativa al2 = new Alternativa();
 
 	private Alternativa al3 = new Alternativa();
+	
+	
+	
 
 	private Alternativa alternativaSelecionada;
 
@@ -67,25 +73,34 @@ public class QuestaoMB {
 
 	public String jogar() {
 		questoes = pesquisar();
-		cont = 1;
+		cont = 0;
 		acertos = 0;
+		erros = 0;
 		indice = 0;
 		questao = questoes.get(indice);
-		System.out.println(questao.getDescricao());
 		return "pm:questao";
 
 	}
 
-	public void incrementa() {
-		System.out.println(cont);
-		cont = cont + 1;
-	}
+	
+	
+	
 
 	public String proxima() {
 		if (cont / 60 > 5) {
 			return "pm:fim";
 		}
+		if(alternativaSelecionada.isCorreta()){
+			JsfUtil.showInfoMessage("CERTA RESPOSTA!");
+			acertos= acertos+1;
+		} else{
+			JsfUtil.showErrorMessage("ERRADO!!!");
+		}
 		indice++;
+		if(indice>=questoes.size()){
+			erros = questoes.size() - acertos;
+			return "pm:fim";
+		}
 		questao = questoes.get(indice);
 		return "pm:questao";
 	}
@@ -105,6 +120,15 @@ public class QuestaoMB {
 
 	public Alternativa getCerta() {
 		return certa;
+	}
+	
+
+	public int getErros() {
+		return erros;
+	}
+
+	public void setErros(int erros) {
+		this.erros = erros;
 	}
 
 	public void setCerta(Alternativa certa) {
